@@ -1,0 +1,75 @@
+<html>
+<head>
+    <title>Parental Information</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'SUSE', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div>
+                    <main className="text-center py-8">
+                        <h1 className="text-4xl font-bold mb-12 text-gray-800">Parental Information</h1>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
+                            <div className="card bg-white shadow-lg rounded-lg p-6">
+                                <img src="images.png" alt="Illustration of Peter Handy" className="w-full mb-4 rounded-full"/>
+                                <h2 className="text-xl font-bold text-gray-800">Peter Handy</h2>
+                                <p className="text-gray-600">Role: Father</p>
+                                <p className="text-gray-600">Mobile: 123-456-7890</p>
+                                <p className="text-gray-600">Address: 123 Main St, City, Country</p>
+                                <p className="text-gray-600">Office Address: 456 Office Rd, City, Country</p>
+                            </div>
+                            <div className="card bg-white shadow-lg rounded-lg p-6">
+                                <img src="images.png" alt="Illustration of Ed Ferrol" className="w-full mb-4 rounded-full"/>
+                                <h2 className="text-xl font-bold text-gray-800">Ed Ferrol</h2>
+                                <p className="text-gray-600">Role:Uncle</p>
+                                <p className="text-gray-600">Mobile: 234-567-8901</p>
+                                <p className="text-gray-600">Address: 234 Main St, City, Country</p>
+                                <p className="text-gray-600">Office Address: 567 Office Rd, City, Country</p>
+                            </div>
+                            <div className="card bg-white shadow-lg rounded-lg p-6">
+                                <img src="png-clipart-computer-icons-user-profile-avatar-female-profile-heroes-head-thumbnail.png" alt="Illustration of Arnie Benetchar" className="w-full mb-4 rounded-full"/>
+                                <h2 className="text-xl font-bold text-gray-800">Arnie Benetchar</h2>
+                                <p className="text-gray-600">Role:Mother</p>
+                                <p className="text-gray-600">Mobile: 345-678-9012</p>
+                                <p className="text-gray-600">Address: 345 Main St, City, Country</p>
+                                <p className="text-gray-600">Office Address: 678 Office Rd, City, Country</p>
+                            </div>
+                            <div className="card bg-white shadow-lg rounded-lg p-6">
+                                <img src="png-clipart-computer-icons-user-profile-avatar-female-profile-heroes-head-thumbnail.png" alt="Illustration of Jessica Dawson" className="w-full mb-4 rounded-full"/>
+                                <h2 className="text-xl font-bold text-gray-800">Jessica Dawson</h2>
+                                <p className="text-gray-600">Role:Aunt</p>
+                                <p className="text-gray-600">Mobile: 456-789-0123</p>
+                                <p className="text-gray-600">Address: 456 Main St, City, Country</p>
+                                <p className="text-gray-600">Office Address: 789 Office Rd, City, Country</p>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

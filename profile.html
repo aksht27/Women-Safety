@@ -1,0 +1,104 @@
+<html></html>
+<head>
+    <title>My Profile</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-700 flex items-center justify-center h-screen" style="font-family: 'SUSE', sans-serif;">
+    <div id="root"></div>
+    <script type="text/babel">
+        function Profile() {
+            const [firstName, setFirstName] = React.useState("Andrew");
+            const [lastName, setLastName] = React.useState("Turing");
+            const [timeZone, setTimeZone] = React.useState("+5 GMT");
+            const [phone, setPhone] = React.useState("555-237-2384");
+            const [email, setEmail] = React.useState("andrew.turing@cryptographyinc.com");
+
+            const handleEdit = () => {
+                alert("Edit button clicked");
+            };
+
+            const handleConnectLinkedIn = () => {
+                alert("Connect to LinkedIn button clicked");
+            };
+
+            const handleCancel = () => {
+                window.history.back();
+                window.location.href='/';
+            };
+
+            const handleSave = () => {
+                alert("Profile saved");
+                window.history.back();
+                window.location.href='/';
+            };
+
+            return (
+                <div className="bg-white rounded-lg shadow-lg p-8 w-2/3 max-w-2xl">
+                    <div className="flex justify-end">
+                        <button className="text-gray-400" onClick={handleCancel}>
+                            <i className="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div className="flex items-center mb-6">
+                        <img src="https://placehold.co/100x100" alt="Profile picture of a smiling man" className="rounded-full w-24 h-24 mr-4" />
+                        <div>
+                            <button className="bg-teal-500 text-white px-4 py-2 rounded-full mb-2" onClick={handleConnectLinkedIn}>Connect to LinkedIn</button>
+                            <div className="text-gray-500 flex items-center cursor-pointer" onClick={handleEdit}>
+                                <i className="fas fa-edit mr-2"></i>
+                                <span>Edit</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h1 className="text-2xl font-semibold mb-4">My Profile</h1>
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label className="block text-gray-600 mb-1">First Name</label>
+                            <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full border border-gray-300 rounded px-3 py-2" />
+                        </div>
+                        <div>
+                            <label className="block text-gray-600 mb-1">Last Name</label>
+                            <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full border border-gray-300 rounded px-3 py-2" />
+                        </div>
+                        <div>
+                            <label className="block text-gray-600 mb-1">Time Zone</label>
+                            <input type="text" value={timeZone} onChange={(e) => setTimeZone(e.target.value)} className="w-full border border-gray-300 rounded px-3 py-2" />
+                        </div>
+                        <div>
+                            <label className="block text-gray-600 mb-1">Phone</label>
+                            <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-gray-300 rounded px-3 py-2" />
+                        </div>
+                        <div className="col-span-2">
+                            <label className="block text-gray-600 mb-1">Email Address</label>
+                            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-gray-300 rounded px-3 py-2" />
+                        </div>
+                    </div>
+                    <h2 className="text-xl font-semibold mb-4">Authentication</h2>
+                    <div className="mb-4">
+                        <label className="block text-gray-600 mb-1">SAML ID</label>
+                        <p className="text-gray-800">andrew.turing@cryptographyinc.com</p>
+                    </div>
+                    <div className="mb-6">
+                        <label className="block text-gray-600 mb-1">SAML Details</label>
+                        <a href="https://cryptographyinc.com/login/secure/kQ28neiw99" className="text-teal-500">https://cryptographyinc.com/login/secure/kQ28neiw99</a>
+                    </div>
+                    <div className="flex justify-between items-center bg-gray-200 p-4 rounded-b-lg">
+                        <button className="bg-white text-gray-600 px-6 py-2 rounded-full shadow-md" onClick={handleCancel}>
+                            <i className="fas fa-times"></i>
+                        </button>
+                        <button className="bg-green-500 text-white px-6 py-2 rounded-full shadow-md" onClick={handleSave}>
+                            <i className="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<Profile />, document.getElementById('root'));
+    </script>
+</body>
+</html>

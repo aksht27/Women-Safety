@@ -1,0 +1,537 @@
+<html>
+ <head>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+  <style>
+   body {
+            background:url("3350820-hd_1920 _1080_30fps.mp4");
+            font-family: 'SUSE', sans-serif;
+        }
+        .hover-effect:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+        .button-hover:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+        }
+        .button-talk:hover {
+            background-color: rgba(0, 0, 255, 0.8);
+            cursor: pointer;
+        }
+        .button-share:hover {
+            background-color: rgba(0, 128, 0, 0.8);
+            cursor: pointer;
+        }
+        .notification-bell {
+            position: relative;
+        }
+        .notification-bell .notification-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: white;
+            color: black;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown a:hover {
+            background-color: #ddd;
+        }
+        .notification-bell:hover .dropdown {
+            display: block;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 600px;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .chat-header {
+            background-color: #075E54;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #ECE5DD;
+        }
+        .chat-footer {
+            background-color: #f1f1f1;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 60%;
+        }
+        .chat-message.sent {
+            background-color: #DCF8C6;
+            align-self: flex-end;
+        }
+        .chat-message.received {
+            background-color: white;
+            align-self: flex-start;
+        }
+        .alert-modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .alert-modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .alert-button {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .alert-button:hover {
+            background-color: #d32f2f;
+        }
+        .blur-background {
+            backdrop-filter: blur(5px);
+        }
+        .sidebar {
+            background-color: #1E3A8A;
+            color: #E5E7EB;
+            width: 20%;
+            height: 100vh;
+            padding: 15px;
+        }
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            padding: 30px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: white;
+            border-top: 1px #102357;
+    border-bottom: 1px solid #102357;
+    transition-duration: 0.3s;
+        }
+        .sidebar a:hover {
+          letter-spacing: 2px;
+         color: black;
+          text-transform: uppercase;
+            background-color: white;
+        }
+  </style>
+ </head>
+ <body class="bg-gray-200">
+  <div class="flex">
+   <!-- Sidebar -->
+   <div class="sidebar">
+    <nav class="space-y-4">
+     <a class="flex items-center space-x-2" href="#">
+      <i class="fas fa-home">
+      </i>
+      <span>
+       Home
+      </span>
+     </a>
+     <a class="flex items-center space-x-2" href="profile.html">
+      <i class="fas fa-user">
+      </i>
+      <span>
+       Profile
+      </span>
+     </a>
+    
+     <a class="flex items-center space-x-2" href="parental info.html">
+      <i class="fas fa-users">
+      </i>
+      <span>
+       My Guardians
+      </span>
+     </a>
+     <a class="flex items-center space-x-2" href="defence.html">
+      <i class="fas fa-shield-alt">
+      </i>
+      <span>
+       Self-Defence
+      </span>
+     </a>
+     <a class="flex items-center space-x-2" href="Log in.html">
+      <i class="fas fa-sign-in-alt">
+      </i>
+      <span>
+       Login
+      </span>
+     </a>
+    </nav>
+   </div>
+   <!-- Main Content -->
+   <div class="flex-1 p-8">
+    <div class="flex justify-between items-center mb-8 bg-blue-900 text-gray-200 p-4 rounded">
+     <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-1 hover-effect p-2 rounded notification-bell">
+       <i class="fas fa-bell">
+       </i>
+       <span class="notification-count">
+        3+
+       </span>
+       <div class="dropdown">
+        <a href="#">
+         Notification 1
+        </a>
+        <a href="#">
+         Notification 2
+        </a>
+        <a href="#">
+         Notification 3
+        </a>
+       </div>
+      </div>
+      <div class="flex items-center space-x-1 hover-effect p-2 rounded" id="messageButton">
+       <i class="fas fa-comments">
+       </i>
+       <span>
+        7
+       </span>
+      </div>
+     </div>
+     <div class="flex items-center space-x-2 hover-effect p-2 rounded">
+      <span>
+       SHE
+      </span>
+      <img alt="User profile picture" class="rounded-full" height="30" src="woman-profile-illustration-download-in-svg-png-gif-file-formats--young-female-girl-avatar-portraits-pack-people-illustrations-6590622.webp" width="30"/>
+     </div>
+    </div>
+    <div class="text-center mb-8">
+     <h1 class="text-4xl font-bold text-blue-900">
+      Welcome to SheSafe
+     </h1>
+    </div>
+    <div class="flex justify-center space-x-4 mb-8">
+     <button class="bg-red-700 text-white px-6 py-2 rounded button-hover flex items-center space-x-2" id="alertButton">
+      <i class="fas fa-exclamation-triangle">
+      </i>
+      <span>
+       ALERT
+      </span>
+     </button>
+     <a href="talktome.html">
+     <button class="bg-blue-700 text-white px-6 py-2 rounded button-talk flex items-center space-x-2">
+      <i class="fas fa-comments">
+      </i>
+      <span>
+       TALK TO ME
+      </span>
+     </button>
+    </a>
+     <button class="bg-green-700 text-white px-6 py-2 rounded button-share flex items-center space-x-2" id="shareLocationButton">
+      <i class="fas fa-map-marker-alt">
+      </i>
+      <span>
+       SHARE LOCATION
+      </span>
+     </button>
+     <a href="maps.html">
+     <button class="bg-green-700 text-white px-6 py-2 rounded button-hover flex items-center space-x-2" >
+      <i class="fas fa-route">
+      </i>
+      <span>
+       SAFEST ROUTE
+      </span>
+     </button>
+    </a>
+    </div>
+    <div class="flex justify-center">
+     <img alt="Women safety illustration" class="rounded" height="300" src="https://storage.googleapis.com/a1aa/image/m9OfxXSg9fk7x0mL4sf4FpXBgjEmkeTpVlNQ8NLaKNWUkyOOB.jpg" width="400"/>
+    </div>
+   </div>
+  </div>
+  <button class="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded-full button-hover">
+   <i class="fas fa-microphone">
+   </i>
+  </button>
+  <!-- The Modal -->
+  <div class="modal" id="messageModal">
+   <div class="modal-content">
+    <div class="chat-header">
+     <span class="close" id="closeModal">&times;
+     </span>
+     <h2 class="text-xl font-bold">
+      Chat
+     </h2>
+    </div>
+    <div class="chat-body" id="chatBody">
+     <div class="chat-message received">
+      Hello! How can I help you?
+     </div>
+     <div class="chat-message sent">
+      I need assistance.
+     </div>
+     <div class="chat-message received">
+      Sure, what do you need help with?
+     </div>
+     <div class="chat-message sent">
+      I need to find the safest route home.
+     </div>
+     <div class="chat-message received">
+      I can help with that. Please share your current location.
+     </div>
+     <div class="chat-message sent">
+      Here is my location.
+     </div>
+     <div class="chat-message received">
+      Thank you. I will find the safest route for you.
+     </div>
+    </div>
+    <div class="chat-footer">
+     <input class="flex-1 p-2 border rounded" id="chatInput" placeholder="Type a message" type="text"/>
+     <button class="bg-blue-500 text-white p-2 rounded ml-2" id="sendButton">
+      Send
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- Alert Modal -->
+  <div class="alert-modal" id="alertModal">
+   <div class="alert-modal-content">
+    <span class="close" id="closeAlertModal">&times;
+    </span>
+    <h2 class="text-xl font-bold mb-4">
+     Whom do you want to contact?
+    </h2>
+    <button class="alert-button" id="contactParents">
+     Parents
+    </button>
+    <button class="alert-button" id="contactSOS">
+     SOS
+    </button>
+   </div>
+  </div>
+  <!-- Share Location Modal -->
+  <div class="modal blur-background" id="shareLocationModal">
+   <div class="modal-content">
+    <div class="chat-header">
+     <span class="close" id="closeShareLocationModal">&times;
+     </span>
+     <h2 class="text-xl font-bold">
+      Share Live Location
+     </h2>
+    </div>
+    <div class="chat-body">
+     <form id="shareLocationForm">
+      <div class="mb-4">
+       <label class="block text-gray-700 text-sm font-bold mb-2" for="parentName">
+        Parent's Name
+       </label>
+       <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="parentName" type="text" placeholder="Enter parent's name"/>
+      </div>
+      <div class="mb-4">
+       <label class="block text-gray-700 text-sm font-bold mb-2" for="parentPhone">
+        Parent's Phone Number
+       </label>
+       <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="parentPhone" type="text" placeholder="Enter parent's phone number"/>
+      </div>
+      <div class="flex items-center justify-between">
+       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="shareLocationSubmit">
+        Share Location
+       </button>
+      </div>
+     </form>
+    </div>
+   </div>
+  </div>
+  <script>
+   // Get the modals
+        var messageModal = document.getElementById("messageModal");
+        var alertModal = document.getElementById("alertModal");
+        var shareLocationModal = document.getElementById("shareLocationModal");
+
+        // Get the buttons that open the modals
+        var messageButton = document.getElementById("messageButton");
+        var alertButton = document.getElementById("alertButton");
+        var shareLocationButton = document.getElementById("shareLocationButton");
+
+        // Get the <span> elements that close the modals
+        var closeMessageModal = document.getElementById("closeModal");
+        var closeAlertModal = document.getElementById("closeAlertModal");
+        var closeShareLocationModal = document.getElementById("closeShareLocationModal");
+
+        // Get the chat input and send button
+        var chatInput = document.getElementById("chatInput");
+        var sendButton = document.getElementById("sendButton");
+
+        // Get the chat body
+        var chatBody = document.getElementById("chatBody");
+
+        // When the user clicks the button, open the message modal 
+        messageButton.onclick = function() {
+            messageModal.style.display = "block";
+        }
+
+        // When the user clicks the button, open the alert modal 
+        alertButton.onclick = function() {
+            alertModal.style.display = "block";
+        }
+
+        // When the user clicks the button, open the share location modal 
+        shareLocationButton.onclick = function() {
+            shareLocationModal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the message modal
+        closeMessageModal.onclick = function() {
+            messageModal.style.display = "none";
+        }
+
+        // When the user clicks on <span> (x), close the alert modal
+        closeAlertModal.onclick = function() {
+            alertModal.style.display = "none";
+        }
+
+        // When the user clicks on <span> (x), close the share location modal
+        closeShareLocationModal.onclick = function() {
+            shareLocationModal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modals, close them
+        window.onclick = function(event) {
+            if (event.target == messageModal) {
+                messageModal.style.display = "none";
+            }
+            if (event.target == alertModal) {
+                alertModal.style.display = "none";
+            }
+            if (event.target == shareLocationModal) {
+                shareLocationModal.style.display = "none";
+            }
+        }
+
+        // When the user clicks the send button, add the message to the chat
+        sendButton.onclick = function() {
+            var message = chatInput.value;
+            if (message.trim() !== "") {
+                var messageElement = document.createElement("div");
+                messageElement.className = "chat-message sent";
+                messageElement.textContent = message;
+                chatBody.appendChild(messageElement);
+                chatInput.value = "";
+
+                // Simulate a response from the chatbot
+                setTimeout(function() {
+                    var responseElement = document.createElement("div");
+                    responseElement.className = "chat-message received";
+                    if (message.toLowerCase().includes("help")) {
+                        responseElement.textContent = "How can I help you?";
+                    } else {
+                        responseElement.textContent = "This is a response from the chatbot.";
+                    }
+                    chatBody.appendChild(responseElement);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        // Allow pressing Enter to send the message
+        chatInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                sendButton.click();
+            }
+        });
+
+        // When the user clicks the contact parents button, send an alert message
+        document.getElementById("contactParents").onclick = function() {
+            alert("Sending message to +91 7459852557: Help I'm in danger");
+            alertModal.style.display = "none";
+        }
+
+        // When the user clicks the contact SOS button, report to emergency helpline
+        document.getElementById("contactSOS").onclick = function() {
+            alert("Reporting to emergency helpline: Help I'm in danger");
+            alertModal.style.display = "none";
+        }
+
+        // When the user clicks the share location submit button, share the location
+        document.getElementById("shareLocationSubmit").onclick = function() {
+            var parentName = document.getElementById("parentName").value;
+            var parentPhone = document.getElementById("parentPhone").value;
+            if (parentName.trim() !== "" && parentPhone.trim() !== "") {
+                alert("Sharing live location with " + parentName + " (" + parentPhone + ")");
+                shareLocationModal.style.display = "none";
+            } else {
+                alert("Please enter both name and phone number.");
+            }
+        }
+        
+  </script>
+  <script src="script.js"></script>
+ </body>
+</html>
